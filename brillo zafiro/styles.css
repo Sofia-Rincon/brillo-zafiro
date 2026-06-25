@@ -1,0 +1,635 @@
+/* --- 1. Variables y Reset Básico --- */
+:root {
+    --color-primary: #0A0F1D; /* Azul oscuro Zafiro */
+    --color-secondary: #d8a248; /* Nuevo tono dorado */
+    --color-text-light: #F5F5F5;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-primary);
+    background-color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+/* --- 2. Encabezado y Navegación (Común) --- */
+.header {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 5%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    max-height: 120px;
+}
+
+.brand {
+    font-family: var(--font-heading);
+    font-size: 2.5em;
+    letter-spacing: 4px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin-right: auto;
+    padding-left: 20px;
+}
+
+.nav a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: var(--color-secondary);
+}
+
+/* --- 3. Títulos de Página (Común) --- */
+#content {
+    padding: 0 5%;
+    text-align: center;
+}
+
+/* Espaciado específico para la página de categorías: separa el título del header
+   y aleja las tarjetas del pie de página */
+.categories-page {
+    padding-top: 120px;   /* separa el título del header */
+    padding-bottom: 220px; /* más espacio entre categorías y footer */
+}
+
+@media (max-width: 800px) {
+    .categories-page {
+        padding-top: 60px;
+        padding-bottom: 100px;
+    }
+
+    /* Ajustes para grid de categorías en móvil: 1 columna y tamaño de imagen más pequeño */
+    .category-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+
+    .category-item img {
+        height: 300px;
+    }
+
+    /* Reiniciar hero full-bleed behavior en móviles para evitar horizontal scroll */
+    .hero {
+        width: 100%;
+        margin-left: 0;
+        height: 50vh;
+        min-height: 260px;
+    }
+}
+
+/* Añadir margen extra a la sección de categorías para separar del footer */
+.categories {
+    margin-bottom: 60px;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--color-primary);
+    border-bottom: 3px solid var(--color-secondary);
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+/* --- 4. Estilos de la Página de Inicio (index.html) --- */
+.hero {
+    /* Robust full-bleed hero: uses negative 50vw margins so it spans the full viewport width
+       while staying centered and avoiding layout issues caused by container padding. */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
+    height: 80vh;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 1;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2); 
+    z-index: 2;
+}
+
+.hero-text {
+    z-index: 3;
+    color: var(--color-text-light);
+    max-width: 80%;
+}
+
+.elegant-text {
+    font-family: var(--font-heading);
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.featured-products {
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.featured-products h2 {
+    font-family: var(--font-heading);
+    font-size: 2em;
+    margin-bottom: 40px;
+    color: var(--color-primary);
+}
+
+.product-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.product-item {
+    flex-basis: 30%; 
+    text-align: center;
+    overflow: hidden;
+}
+
+.product-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    border-radius: 5px;
+    transition: opacity 0.3s;
+
+    /* Mostrar imágenes completas en móviles para productos destacados */
+    .product-grid .product-item img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        object-fit: contain; /* no recorta, muestra toda la imagen */
+        border-radius: 5px;
+    }
+}
+
+.product-item:hover img {
+    opacity: 0.8;
+}
+
+.product-item p {
+    margin-top: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--color-secondary);
+}
+
+.product-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-gallery {
+    padding: 60px 5%;
+    text-align: center;
+    background-image: url('img/fondo-galeria.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.product-gallery::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(240, 240, 240, 0.9);
+    z-index: 1;
+}
+
+.product-gallery > * {
+    position: relative;
+    z-index: 2;
+}
+
+.product-gallery h3 {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.product-gallery h2 {
+    font-family: var(--font-heading);
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: var(--color-primary);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- 5. Estilos de la Página de Categorías (categorias.html) --- */
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.category-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.category-item img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+}
+
+.category-item:hover img {
+    transform: scale(1.05);
+}
+
+.category-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(10, 15, 29, 0.7); 
+    color: var(--color-text-light);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.4s ease-out;
+}
+
+.category-item:hover .category-info {
+    transform: translateY(0);
+}
+
+.category-info h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+/* --- 6. Estilos de la Lista de Productos (anillos.html, aretes.html, etc.) --- */
+.product-list {
+    padding: 50px 5%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.product-detail-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    padding: 30px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.product-detail-item:last-child {
+    border-bottom: none; 
+    margin-bottom: 0;
+}
+
+.product-detail-item img {
+    /* Imágenes cuadradas: usar aspect-ratio para mantener 1:1 y object-fit para recorte */
+    width: 320px;
+    max-width: 40vw;
+    aspect-ratio: 1 / 1;
+    height: auto; /* la altura se deriva del aspect-ratio */
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-text {
+    flex: 1;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.product-text h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8em;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.product-text .price {
+    font-family: var(--font-heading);
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--color-secondary); 
+    margin-bottom: 15px;
+}
+
+.product-text .description {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* --- 7. Estilos de la Página de Contacto (contacto.html) --- */
+.contact-section {
+    padding: 50px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-subtitle {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    text-align: left;
+}
+
+.contact-form-wrapper {
+    flex: 2; 
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.contact-info-map {
+    flex: 1; 
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.contact-form-wrapper h2, .contact-info-map h2 {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-secondary);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--color-primary);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    font-family: var(--font-body);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.map-placeholder {
+    height: 250px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #666;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+/* --- 8. Estilos de Botones (Común) --- */
+
+.btn {
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.3s, color 0.3s;
+}
+
+.btn.banner-btn {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    padding: 12px 35px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+}
+
+.btn.banner-btn:hover {
+    background-color: var(--color-text-light);
+    transform: scale(1.05);
+}
+
+.btn.category-btn {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.btn.category-btn:hover {
+    background-color: var(--color-text-light);
+    color: var(--color-primary);
+}
+
+.btn.gallery-btn {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(10, 15, 29, 0.85);
+    color: var(--color-text-light);
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.btn.gallery-btn:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+}
+
+.btn.contact-btn {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+
+.btn.contact-btn:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+
+/* --- 9. Pie de Página (Común) --- */
+.contact-info {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    text-align: center;
+    padding: 30px 5%;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+}
+
+.contact-info h3 {
+    font-family: var(--font-heading);
+    color: var(--color-secondary);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.contact-info p {
+    margin: 5px 0;
+}
+
+/* --- 10. Responsividad (Ajustes para móviles) --- */
+@media (max-width: 800px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .brand {
+        margin-top: 5px;
+    }
+    .nav {
+        margin-top: 15px;
+    }
+    .nav a {
+        margin: 0 10px;
+    }
+    .elegant-text {
+        font-size: 2em;
+    }
+    .product-grid {
+        flex-direction: column;
+    }
+    .contact-container {
+        flex-direction: column;
+    }
+    .product-detail-item {
+        flex-direction: column; 
+        text-align: center;
+    }
+    .product-detail-item img {
+        width: 80%;
+        max-width: 320px;
+        aspect-ratio: 1 / 1;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    .product-text {
+        width: 100%;
+        padding: 0;
+    }
+}
