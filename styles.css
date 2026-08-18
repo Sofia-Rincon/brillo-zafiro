@@ -1,6 +1,6 @@
 /* --- 1. Variables y Reset Básico --- */
 :root {
-    --color-primary: #0A0F1D; /* Azul oscuro Zafiro */
+    --color-primary: #151D33; /* Azul oscuro Zafiro */
     --color-secondary: #d8a248; /* Nuevo tono dorado */
     --color-text-light: #F5F5F5;
     --font-heading: 'Playfair Display', serif;
@@ -503,6 +503,7 @@ body {
 
 .form-group input[type="text"],
 .form-group input[type="email"],
+.form-group input[type="tel"],
 .form-group textarea {
     width: 100%;
     padding: 10px;
@@ -532,8 +533,8 @@ body {
 
 /* --- 8. Estilos de Botones (Común) --- */
 
-/* --- 8. Estilos de Botones (Común) --- */
-
+/* Sistema unificado de botones elegantes */
+.btn,
 .custom-btn {
     display: inline-block;
     text-decoration: none;
@@ -541,64 +542,110 @@ body {
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease, background 0.25s ease, color 0.25s ease;
-    border: 1px solid rgba(120, 88, 12, 0.7);
-    box-shadow: 0 8px 18px rgba(179, 141, 43, 0.28);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background: linear-gradient(135deg, #d9b75f 0%, #f4d77a 35%, #c89b2d 100%);
     color: #1d1d1d;
+    box-shadow: 0 8px 20px rgba(179, 141, 43, 0.3);
+    position: relative;
+    overflow: hidden;
 }
 
+.btn::before,
+.custom-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: left 0.35s ease;
+    z-index: -1;
+}
+
+.btn:hover,
+.btn:focus,
 .custom-btn:hover,
-.btn:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 12px 22px rgba(179, 141, 43, 0.38);
-    filter: brightness(1.03);
+.custom-btn:focus {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(179, 141, 43, 0.45), 
+                0 5px 15px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.08);
 }
 
-/* BOTÓN DEL BANNER */
+.btn:active,
+.custom-btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(179, 141, 43, 0.3);
+}
 
+/* BOTÓN DEL BANNER Y GENERAL */
+.btn.banner-btn,
 .custom-btn.banner-btn {
-    padding: 14px 34px;
-    border-radius: 999px;
+    padding: 15px 40px;
     font-size: 0.96em;
 }
 
-
 /* BOTONES DE CATEGORÍAS */
-
 .custom-btn.category-btn {
-    padding: 10px 22px;
-    border-radius: 999px;
+    padding: 11px 24px;
     font-size: 0.8em;
 }
 
-
 /* BOTONES DE LA GALERÍA */
-
 .custom-btn.gallery-btn {
     position: absolute;
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 9px 18px;
-    border-radius: 999px;
+    padding: 10px 20px;
     font-size: 0.75em;
 }
 
 .custom-btn.gallery-btn:hover {
-    transform: translateX(-50%) translateY(-2px);
+    transform: translateX(-50%) translateY(-4px);
 }
 
-
 /* BOTÓN DE CONTACTO */
-
 .btn.contact-btn,
 .custom-btn.contact-btn {
-    padding: 10px 30px;
-    border-radius: 999px;
+    padding: 12px 35px;
     font-size: 0.9em;
     text-decoration: none;
     line-height: 1.2;
+    margin-top: 20px;
+}
+
+/* Asegurar que el submit button tenga los estilos correctos */
+button[type="submit"] {
+    background: linear-gradient(135deg, #d9b75f 0%, #f4d77a 35%, #c89b2d 100%);
+    color: #1d1d1d;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 35px;
+    font-size: 0.9em;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(179, 141, 43, 0.3);
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(179, 141, 43, 0.45), 
+                0 5px 15px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.08);
+}
+
+button[type="submit"]:active {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(179, 141, 43, 0.3);
 }
 
 /* --- 9. Pie de Página (Común) --- */
@@ -661,4 +708,15 @@ body {
         width: 100%;
         padding: 0;
     }
+    .mensaje-exito {
+    margin: 20px 0;
+    padding: 15px 20px;
+    border: 1px solid #d4af37;
+    border-radius: 8px;
+    text-align: center;
+    color: #d4af37;
+    background-color: rgba(212, 175, 55, 0.08);
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
 }
